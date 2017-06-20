@@ -21,7 +21,7 @@ import Layout from './components/Layout';
 import Navbar from './components/Navbar';
 import Header from './components/Header';
 
-function getUserInfo(username){
+/*function getUserInfo(username){
   return window.axios.get('https://api.github.com/users/' + username);
 }
 
@@ -32,11 +32,11 @@ function getRepos(username){
 function getPosts(blogUrl){
   console.log('Get Posts Function Passed');
   return window.axios.get(blogUrl);
-}
+}*/
 
 
 
-var helpers = {
+/*var helpers = {
   getGithubInfo: function(username){
     return window.axios.all([getRepos(username), getUserInfo(username)])
       .then(function(arr){
@@ -46,7 +46,7 @@ var helpers = {
         }
       })
   }
-}
+}*/
 
 /*var username = 'boylecreations';
 var promiseObj = getRepos(username);
@@ -94,13 +94,14 @@ var url = 'http://boylecreations.com/wp-json/wp/v2/posts';
 var xhr = createCORSRequest('GET', url);
 xhr.send();*/
 
-var url = 'http://boylecreations.com/wp-json/wp/v2/posts';
+var url = 'http://www.boylecreations.com/wp-json/wp/v2/posts';
 
-var axiosConfig = {
-  headers: { 'Access-Control-Allow-Headers': 'X-CSRF-TOKEN'}
-}
+//var axiosConfig = {
+//  headers: { 'Access-Control-Allow-Headers': 'X-CSRF-TOKEN'}
+//}
 
-window.axios.get(url, axiosConfig).then(function(resposne) {
+
+window.axios.get(url).then(function(response) {
   console.log('yay');
 }).catch(function(response){
   console.log('fail');

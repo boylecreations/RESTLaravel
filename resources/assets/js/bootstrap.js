@@ -21,11 +21,12 @@ window._ = require('lodash');
  */
 
 window.axios = require('axios');
+//
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //window.axios.defaults.headers.common['Authorization'] = '1882f8709e1df2dc0f500e17ed40314ad07f2c06';
 //window.axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-//window.axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+window.axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
@@ -36,8 +37,10 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 let token = document.head.querySelector('meta[name="csrf-token"]');
 
 if (token) {
+    console.log('token');
     window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
+    console.log('no-token');
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 

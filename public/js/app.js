@@ -12084,29 +12084,30 @@ var YT_API_KEY = '';
 
 
 
-function getUserInfo(username) {
+/*function getUserInfo(username){
   return window.axios.get('https://api.github.com/users/' + username);
 }
 
-function getRepos(username) {
+function getRepos(username){
   return window.axios.get('https://api.github.com/users/' + username + '/repos');
 }
 
-function getPosts(blogUrl) {
+function getPosts(blogUrl){
   console.log('Get Posts Function Passed');
   return window.axios.get(blogUrl);
-}
+}*/
 
-var helpers = {
-  getGithubInfo: function getGithubInfo(username) {
-    return window.axios.all([getRepos(username), getUserInfo(username)]).then(function (arr) {
-      return {
-        repos: arr[0].data,
-        bio: arr[1].data
-      };
-    });
+/*var helpers = {
+  getGithubInfo: function(username){
+    return window.axios.all([getRepos(username), getUserInfo(username)])
+      .then(function(arr){
+        return {
+          repos: arr[0].data,
+          bio: arr[1].data
+        }
+      })
   }
-};
+}*/
 
 /*var username = 'boylecreations';
 var promiseObj = getRepos(username);
@@ -12154,13 +12155,14 @@ var url = 'http://boylecreations.com/wp-json/wp/v2/posts';
 var xhr = createCORSRequest('GET', url);
 xhr.send();*/
 
-var url = 'http://boylecreations.com/wp-json/wp/v2/posts';
+var url = 'http://www.boylecreations.com/wp-json/wp/v2/posts';
 
-var axiosConfig = {
-  headers: { 'Access-Control-Allow-Headers': 'X-CSRF-TOKEN' }
-};
+//var axiosConfig = {
+//  headers: { 'Access-Control-Allow-Headers': 'X-CSRF-TOKEN'}
+//}
 
-window.axios.get(url, axiosConfig).then(function (resposne) {
+
+window.axios.get(url).then(function (response) {
   console.log('yay');
 }).catch(function (response) {
   console.log('fail');
@@ -13192,11 +13194,12 @@ window._ = __webpack_require__(151);
  */
 
 window.axios = __webpack_require__(107);
+//
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //window.axios.defaults.headers.common['Authorization'] = '1882f8709e1df2dc0f500e17ed40314ad07f2c06';
 //window.axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-//window.axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+window.axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
@@ -13207,8 +13210,10 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 var token = document.head.querySelector('meta[name="csrf-token"]');
 
 if (token) {
+  console.log('token');
   window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
+  console.log('no-token');
   console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 

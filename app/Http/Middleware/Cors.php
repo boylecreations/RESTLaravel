@@ -15,15 +15,9 @@ class Cors
      */
     public function handle($request, Closure $next)
     {
-        $domains = ['http://projects.dev'];
+      return $next($request)->header('Access-Control-Allow-Origin' , 'http://www.boylecreations.com')
+        ->header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT, DELETE')
+        ->header('Access-Control-Allow-Headers', 'Content-Type, Accept, Authorization, X-Requested-With');
 
-        if (isset($request->server()['HTTP_ORIGIN'])) {
-          $origin = $request->server()['HTTP_ORIGIN'];
-          if (in_array($origin, $domains)) {
-            header('Access-Control-Allow-Origin: ' . $origin);
-            header('Access-Control-Allow-Headers: Origin, Content-Type, Authorization');
-          }
-        }
-        return $next($request);
     }
 }
